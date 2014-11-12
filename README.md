@@ -25,7 +25,8 @@ where the -n option only prints the number of errors, and the -d option specifie
 Compile
 ======
 
-	g++ src/main.cpp -o bin/scheck
+	g++ src/main.cpp -o bin/scheck [not in use anymore]
+	g++ -I inc src/main.cpp -o bin/scheck
 
 Run
 ======

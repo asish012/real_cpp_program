@@ -3,8 +3,8 @@
 class Dictionary
 {
 public:
-	dictionary(const std::string & filename);
-	~dictionary();
+	Dictionary(const std::string & filename);
+	~Dictionary();
 
-	void check(const std::string & word) const;
+	bool check(const std::string & word) const;
 };
