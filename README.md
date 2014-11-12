@@ -13,9 +13,11 @@ You arrive in your office at a publisher of technical journals one morning to re
 [ Original Tutorial: http://latedev.wordpress.com/2011/07/28/writing-a-real-c-program-part-1a/ ]
 
 The end product would be a console program, who’s command line would look something like this :: 
+	
 	scheck [-n] [[-d special.dict] ...] [file ...]
 
 where the -n option only prints the number of errors, and the -d option specifies a special dictionary. There can be more than one -d option. The checker checks the listed files (if none are specified it reads standard input) and produces output of the form ::
+	
 	article1.txt,2 errors
 	article1.text,7,thre,perhaps thre is a reaction 
 	article1.text,12,phiton,low-energy phiton is emitted
