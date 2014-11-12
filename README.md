@@ -13,4 +13,3 @@ where the -n option only prints the number of errors, and the -d option specifie
 	article1.txt,2 errors
 	article1.text,7,thre,perhaps thre is a reaction 
 	article1.text,12,phiton,low-energy phiton is emitted
-
