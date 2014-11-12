@@ -7,8 +7,8 @@ using namespace std;
 int main() {
 	cout << "scheck version 0.1" << endl;
 
-	Dictionary dictionary("mydict.dat");
-	string word = "dog";
+	Dictionary dictionary("data/mydictionary.dat");
+	string word = "cat";
 	if(dictionary.check(word)) {
 		cout << word << " is OK\n";
 	} else {

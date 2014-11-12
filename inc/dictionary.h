@@ -3,12 +3,17 @@
 
 #include <string>
 #include <set>
+#include <fstream>
 
 class Dictionary
 {
 public:
 	Dictionary(const std::string & filename) {
-		words_.insert("dog");
+		std::string word;
+		std::ifstream filereader(filename.c_str());
+		while(std::getline(filereader, word)) {
+			words_.insert(word);
+		}
 	}
 
 	~Dictionary() {}
