@@ -4,15 +4,25 @@
 #include <string>
 #include <set>
 #include <fstream>
+#include "scheckerror.h"
 
-class Dictionary
-{
+class Dictionary {
 public:
-	Dictionary(const std::string & filename) {
+	Dictionary(const std::string & filename) {		
+		std::ifstream wordfile(filename.c_str());
+		if (! wordfile.is_open())
+		{
+			throw ScheckError("Couldn't open word file: " + filename);
+		}
+
 		std::string word;
-		std::ifstream filereader(filename.c_str());
-		while(std::getline(filereader, word)) {
+		while(std::getline(wordfile, word)) {
 			words_.insert(word);
+		}
+
+		if (! wordfile.eof())
+		{
+			throw ScheckError("Error reading word file: " + filename);
 		}
 	}
 
