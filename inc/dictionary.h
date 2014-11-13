@@ -4,7 +4,7 @@
 #include <string>
 #include <set>
 #include <fstream>
-#include "scheckerror.h"
+#include "ScheckError.h"
 
 class Dictionary {
 public:

@@ -1,5 +1,5 @@
-#include "parser.h"
-#include "scheckerror.h"
+#include "Parser.h"
+#include "ScheckError.h"
 
 using namespace std;
 

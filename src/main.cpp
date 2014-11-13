@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
-#include "dictionary.h"
-#include "scheckerror.h"
-#include "parser.h"
+#include "Dictionary.h"
+#include "ScheckError.h"
+#include "Parser.h"
 
 using namespace std;
 
