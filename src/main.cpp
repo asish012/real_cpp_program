@@ -2,6 +2,7 @@
 #include <string>
 #include "dictionary.h"
 #include "scheckerror.h"
+#include "parser.h"
 
 using namespace std;
 
@@ -10,8 +11,16 @@ int main() {
 
 	try {
 		Dictionary dictionary("data/mydictionary.dat");
+
+		istream submission("data/submission1.txt");
+		if(! submission.is_open()) {
+			throw ScheckError("Can't open submitted file");
+		}
+
+		Parser parser(submission);
+
 		string word;
-		while(getline(cin, word)) {
+		while( (word = parser.nextWord()) != "") {
 			if(dictionary.check(word)) {
 				cout << word << " is OK\n";
 			} else {
