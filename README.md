@@ -26,7 +26,8 @@ Compile
 ======
 
 	g++ src/main.cpp -o bin/scheck [not in use]
-	g++ -I inc src/main.cpp -o bin/scheck
+	g++ -I inc src/main.cpp -o bin/scheck [not in use]
+	g++ -I inc src/parser.cpp src/main.cpp -o bin/scheck
 
 Run
 ======
