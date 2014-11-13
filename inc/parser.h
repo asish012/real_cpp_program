@@ -18,7 +18,7 @@ private:
 	unsigned int lineNumber_;
 	std::string line_;
 	std::istringstream ss_;
-	std::string readLine();
+	bool readNextLine();
 };
 
 #endif

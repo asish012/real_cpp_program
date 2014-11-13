@@ -11,7 +11,7 @@ string Parser::nextWord() {
 	if (ss_ >> word)
 		return word;
 	else if (ss_.eof()) {
-		if (readLine())	{
+		if (readNextLine())	{
 			return nextWord();
 		} else {
 			return "";
@@ -29,8 +29,8 @@ string Parser::getContext() const {
 	return line_;
 }
 
-bool Parser::readLine() {
-	if (getLine(submission_, line_)) {
+bool Parser::readNextLine() {
+	if (getline(submission_, line_)) {
 		ss_.clear();
 		ss_.str(line_);
 		lineNumber_++;
