@@ -13,18 +13,18 @@ int main() {
 		Dictionary dictionary("data/mydictionary.dat");
 
 		istream submission("data/submission1.txt");
-		if(! submission.is_open()) {
+		if (! submission.is_open()) {
 			throw ScheckError("Can't open submitted file");
 		}
 
 		Parser parser(submission);
 
 		string word;
-		while( (word = parser.nextWord()) != "") {
-			if(dictionary.check(word)) {
+		while ( (word = parser.nextWord()) != "") {
+			if (dictionary.check(word)) {
 				cout << word << " is OK\n";
 			} else {
-				cout << word << " is misspelt\n";
+				cout << word << " is misspelt at Line" << parser.getLineNumber << endl;
 			}
 		}
 	} catch (const ScheckError & e) {
