@@ -2,17 +2,23 @@
 #define INC_PARSER_H
 
 #include <iostream>
+#include <sstream>
+#include <string>
 
 class Parser
 {
 public:
 	Parser(std::istream & stream);
 	std::string nextWord();
-	unsigned int lineNumber() const;
+	unsigned int getLineNumber() const;
 	std::string getContext() const;
 
-private:
+private:	
 	std::istream & submission_;
+	unsigned int lineNumber_;
+	std::string line_;
+	std::istringstream ss_;
+	std::string readLine();
 };
 
 #endif
