@@ -13,12 +13,15 @@ public:
 	unsigned int getLineNumber() const;
 	std::string getContext() const;
 
-private:	
+private:
+	enum State { inSpace = 0, inWord, inDigit };
+	State state_;
 	std::istream & submission_;
 	unsigned int lineNumber_;
 	std::string line_;
-	std::istringstream ss_;
-	bool readNextLine();
+	unsigned int charPos_;
+	bool readLine();
+	char nextChar();	
 };
 
 #endif

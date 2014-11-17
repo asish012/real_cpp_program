@@ -16,7 +16,7 @@ public:
 		}
 
 		std::string word;
-		while(std::getline(wordfile, word)) {
+		while (std::getline(wordfile, word)) {
 			words_.insert(word);
 		}
 
@@ -28,7 +28,7 @@ public:
 
 	~Dictionary() {}
 
-	bool check(const std::string & word) const {
+	bool check (const std::string & word) const {
 		return words_.find(word) != words_.end();
 	}
 
