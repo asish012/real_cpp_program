@@ -14,7 +14,7 @@ public:
 	std::string getContext() const;
 
 private:
-	enum State { inSpace = 0, inWord, inDigit };
+	enum State { inSpace = 0, inWord, inDigit};
 	State state_;
 	std::istream & submission_;
 	unsigned int lineNumber_;

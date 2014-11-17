@@ -69,5 +69,16 @@ char Parser::nextChar() {
 			return 0;
 		}
 	}
-	return line_[charPos_++];
+
+	// Handle hiphened word (broken word because of line break)
+	// instead of isspace() we could use line_[charPos_] == '\r' (automatic carry break of line)
+	char c = line_[charPos_++];
+	if (c == '-' && std::isspace(line_[charPos_])) {
+		if (! readLine())
+			return c;
+		else
+			return line_[charPos_++];
+	}
+
+	return c;
 }
