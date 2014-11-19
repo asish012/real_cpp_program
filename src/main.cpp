@@ -7,8 +7,15 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char * argv[]) {
 	cout << "scheck version 0.1" << endl;
+
+	Reporter * reporter = 0;
+	if (argc == 1) {
+		reporter = new CSVReporter(cout);
+	} else {
+		// reporter = new XMLReporter(cout);
+	}
 
 	try {
 		Dictionary dictionary("data/mydictionary.dat");
@@ -20,16 +27,14 @@ int main() {
 		}
 
 		Parser parser(submission);
-		CSVReporter reporter(cout);
-		reporter.reportHeader();
-
+		reporter->reportHeader();
 		string word;
 		while ( (word = parser.nextWord()) != "") {
 			if (! dictionary.check(word)) {
-				reporter.reportMisspellDetails(word, parser.getContext(), parser.getLineNumber(), sub);
+				reporter->reportMisspellDetails(word, parser.getContext(), parser.getLineNumber(), sub);
 			}
 		}
-		reporter.reportFooter();
+		reporter->reportFooter();
 	} catch (const ScheckError & e) {
 		cout << "Error: " << e.what() << endl;
 		return 1;
@@ -37,4 +42,6 @@ int main() {
 		cout << "Error: Unknown Exception" << endl;
 		return 2;
 	}
+
+	delete reporter;
 }

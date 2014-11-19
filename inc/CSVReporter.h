@@ -3,7 +3,7 @@
 
 #include "Reporter.h"
 
-class CSVReporter : Reporter
+class CSVReporter : public Reporter
 {
 public:
 	CSVReporter(std::ostream & os);
