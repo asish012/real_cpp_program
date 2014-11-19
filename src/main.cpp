@@ -3,6 +3,7 @@
 #include "Dictionary.h"
 #include "ScheckError.h"
 #include "Parser.h"
+#include "CSVReporter.h"
 
 using namespace std;
 
@@ -12,21 +13,23 @@ int main() {
 	try {
 		Dictionary dictionary("data/mydictionary.dat");
 
-		ifstream submission("data/submission1.txt");
+		string sub = "data/submission1.txt";
+		ifstream submission(sub);
 		if (! submission.is_open()) {
 			throw ScheckError("Can't open submitted file");
 		}
 
 		Parser parser(submission);
+		CSVReporter reporter(cout);
+		reporter.reportHeader();
 
 		string word;
 		while ( (word = parser.nextWord()) != "") {
-			if (dictionary.check(word)) {
-				cout << word << " is OK\n";
-			} else {
-				cout << word << " is misspelt at Line " << parser.getLineNumber() << endl;
+			if (! dictionary.check(word)) {
+				reporter.reportMisspellDetails(word, parser.getContext(), parser.getLineNumber(), sub);
 			}
 		}
+		reporter.reportFooter();
 	} catch (const ScheckError & e) {
 		cout << "Error: " << e.what() << endl;
 		return 1;
