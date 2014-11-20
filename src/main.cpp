@@ -10,9 +10,9 @@ using namespace std;
 int main(int argc, char * argv[]) {
 	cout << "scheck version 0.1" << endl;
 
-	Reporter * reporter = 0;
+	unique_ptr<Reporter> reporter = 0;
 	if (argc == 1) {
-		reporter = new CSVReporter(cout);
+		reporter = unique_ptr<Reporter> (new CSVReporter(cout));
 	} else {
 		// reporter = new XMLReporter(cout);
 	}
@@ -42,6 +42,4 @@ int main(int argc, char * argv[]) {
 		cout << "Error: Unknown Exception" << endl;
 		return 2;
 	}
-
-	delete reporter;
 }
