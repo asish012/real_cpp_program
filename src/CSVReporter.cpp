@@ -2,6 +2,18 @@
 
 using std::string;
 
+// Handle word with cotation symbol (")
+string toCSV(const string & word) {
+	string csvstr;
+	for (unsigned int i = 0; i < word.size(); ++i) {
+		if (word[i] == '"') {
+			csvstr += '"';
+		}
+		csvstr += word[i];
+	}
+	return '"' + csvstr + '"';
+}
+
 CSVReporter::CSVReporter(std::ostream & os) : Reporter(os) {}
 
 void CSVReporter::reportHeader() {
@@ -9,10 +21,10 @@ void CSVReporter::reportHeader() {
 }
 
 void CSVReporter::reportMisspellDetails(const std::string & word, const std::string & context, unsigned int lineNo, const std::string & filename) {
-	out() << word << ",";
-	out() << context << ",";
+	out() << toCSV(word) << ",";
+	out() << toCSV(context) << ",";
 	out() << '"' << lineNo << '"' << ",";
-	out() << filename << "\n";
+	out() << toCSV(filename) << "\n";
 }
 
 void CSVReporter::reportFooter() {

@@ -19,7 +19,7 @@ string Parser::nextWord() {
 				}
 				break;
 			case inWord:
-				if (std::isalpha(c) || c == '\'') {
+				if (std::isalpha(c) || c == '\'' || c == '"') {
 					word += c;
 				} else if (std::isdigit(c)) {
 					state_ = inDigit;
@@ -47,7 +47,7 @@ unsigned int Parser::getLineNumber() const {
 }
 
 string Parser::getContext() const {
-	return line_;
+	return line_.substr(0, line_.size() - 1);
 }
 
 bool Parser::readLine() {
