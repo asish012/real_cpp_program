@@ -4,37 +4,54 @@
 #include "ScheckError.h"
 #include "Parser.h"
 #include "CSVReporter.h"
+#include "CommandLine.h"
+#include "Settings.h"
 
 using namespace std;
+
+Reporter * MakeReporter(Settings::Report rt) { 
+	if (rt == Settings::rtCSV) {
+		return new CSVReporter(cout);
+	} else { 
+		// return new XMLReporter(cout);
+		throw ScheckError("XMLReporter not implemented yet");
+	}
+}
+
+void CheckSubmission(const Dictionary & d, istream & sub, const std::string & subname, Reporter & rep) {
+	Parser parser(sub);
+	rep.reportHeader();
+	string word;
+	while ( (word = parser.nextWord()) != "") {
+		if (! d.check(word)) {
+			rep.reportMisspellDetails(word, parser.getContext(), parser.getLineNumber(), subname);
+		}
+	}
+	rep.reportFooter();
+}
 
 int main(int argc, char * argv[]) {
 	cout << "scheck version 0.1" << endl;
 
-	unique_ptr<Reporter> reporter = 0;
-	if (argc == 1) {
-		reporter = unique_ptr<Reporter> (new CSVReporter(cout));
-	} else {
-		// reporter = new XMLReporter(cout);
-	}
-
 	try {
-		Dictionary dictionary("data/mydictionary.dat");
+		CommandLine cl(argc, argv);
+		Settings settings(cl);
 
-		string sub = "data/submission1.txt";
-		ifstream submission(sub);
-		if (! submission.is_open()) {
-			throw ScheckError("Can't open submitted file");
-		}
+		Dictionary d(settings.DictName());
+		unique_ptr<Reporter> rep(MakeReporter(settings.ReportType()));
 
-		Parser parser(submission);
-		reporter->reportHeader();
-		string word;
-		while ( (word = parser.nextWord()) != "") {
-			if (! dictionary.check(word)) {
-				reporter->reportMisspellDetails(word, parser.getContext(), parser.getLineNumber(), sub);
+		if (cl.Argc() == 1) {
+			CheckSubmission(d, cin, "stdin", *rep); 
+		} else { 
+			for(int i = 1; i < cl.Argc(); i++) {
+				ifstream sub(cl.Argv(i).c_str());
+				if (! sub.is_open()) {
+					throw ScheckError("Cannotopenfile" + cl.Argv(i));
+				}
+				CheckSubmission(d, sub, cl.Argv(i), *rep);
 			}
 		}
-		reporter->reportFooter();
+
 	} catch (const ScheckError & e) {
 		cout << "Error: " << e.what() << endl;
 		return 1;
