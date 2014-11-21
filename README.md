@@ -33,3 +33,8 @@ Run
 ======
 
 	bin/scheck
+
+	To run with default dictionary ~: bin/scheck [enter] then start typing words [enter]
+	To run with submission ~: bin/scheck data/submission1.txt
+	To run with custom dictionary and submission ~: bin/scheck -d data/mydictionary.dat data/submission1.txt
+	To run with default dictionary, custom submission and defining output formate ~: bin/scheck -csv data/submission1.txt
