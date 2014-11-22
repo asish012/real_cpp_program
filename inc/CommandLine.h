@@ -21,7 +21,6 @@ class CommandLine {
 		typedef ArgVec::iterator Iter;
 
 		Iter FindOpt( const std::string & opt );
-
 		ArgVec mArgs;
 };
 
