@@ -18,4 +18,4 @@ settings.o : src/Settings.cpp inc/Settings.h inc/CommandLine.h inc/ScheckError.h
 	g++ -std=c++0x -I inc -c src/Settings.cpp -o bin/settings.o
 
 clean :
-	rm bin/scheck bin/parser.o bin/csvreporter.o bin/main.o
+	rm bin/scheck bin/parser.o bin/csvreporter.o bin/commandline.o bin/ settings.o bin/main.o
