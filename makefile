@@ -1,21 +1,26 @@
+headers := $(wildcard inc/*.h)
+sources := $(wildcard src/*.cpp)
+#objects := $(patsubst %.cpp, %.o, $(notdir $(sources)))
+objects := $(addprefix obj/, $(patsubst %.cpp,%.o,$(notdir $(sources))))
 
-bin/scheck : main.o parser.o csvreporter.o commandline.o settings.o
-	g++ bin/main.o bin/parser.o bin/csvreporter.o bin/commandline.o bin/settings.o -o bin/scheck
+CC := g++
+CFLAGS := -Wall -O3
+TARGET := bin/Scheck
 
-main.o : src/main.cpp inc/Parser.h inc/ScheckError.h inc/Dictionary.h
-	g++ -std=c++0x -I inc -c src/main.cpp -o bin/main.o
+all: $(TARGET)
 
-parser.o : src/Parser.cpp inc/Parser.h inc/ScheckError.h
-	g++ -std=c++0x -I inc -c src/Parser.cpp -o bin/parser.o
+$(TARGET): $(objects)
+	$(CC) -I inc $(objects) -o $(TARGET)
 
-csvreporter.o : src/CSVReporter.cpp inc/CSVReporter.h inc/Reporter.h
-	g++ -std=c++0x -I inc -c src/CSVReporter.cpp -o bin/csvreporter.o
+obj/%.o: src/%.cpp | dirs
+	$(CC) -I inc $(CFLAGS) -c $< -o $@
 
-commandline.o : src/CommandLine.cpp inc/CommandLine.h
-	g++ -std=c++0x -I inc -c src/CommandLine.cpp -o bin/commandline.o
+dirs:
+	-@mkdir -p obj
+	-@mkdir -p bin
 
-settings.o : src/Settings.cpp inc/Settings.h inc/CommandLine.h inc/ScheckError.h
-	g++ -std=c++0x -I inc -c src/Settings.cpp -o bin/settings.o
+clean:
+	-rm obj/*.o $(TARGET)
 
-clean :
-	rm bin/scheck bin/parser.o bin/csvreporter.o bin/commandline.o bin/ settings.o bin/main.o
+run: $(TARGET)
+	./$(TARGET)
