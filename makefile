@@ -1,26 +1,31 @@
+SRC := src
+OBJ := obj
+BIN := bin
+
+CC := g++
+CFLAGS := -std=c++0x -Wall -O3
+
 headers := $(wildcard inc/*.h)
 sources := $(wildcard src/*.cpp)
 #objects := $(patsubst %.cpp, %.o, $(notdir $(sources)))
-objects := $(addprefix obj/, $(patsubst %.cpp,%.o,$(notdir $(sources))))
+objects := $(addprefix $(OBJ)/, $(patsubst %.cpp,%.o,$(notdir $(sources))))
 
-CC := g++
-CFLAGS := -Wall -O3
-TARGET := bin/Scheck
+TARGET := $(BIN)/Scheck
 
 all: $(TARGET)
 
 $(TARGET): $(objects)
 	$(CC) -I inc $(objects) -o $(TARGET)
 
-obj/%.o: src/%.cpp | dirs
+$(OBJ)/%.o: $(SRC)/%.cpp | dirs
 	$(CC) -I inc $(CFLAGS) -c $< -o $@
 
 dirs:
-	-@mkdir -p obj
-	-@mkdir -p bin
+	-@mkdir -p $(OBJ)
+	-@mkdir -p $(BIN)
 
 clean:
-	-rm obj/*.o $(TARGET)
+	-rm $(OBJ)/*.o $(TARGET)
 
 run: $(TARGET)
 	./$(TARGET)
