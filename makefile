@@ -15,14 +15,13 @@ TARGET := $(BIN)/Scheck
 all: $(TARGET)
 
 $(TARGET): $(objects)
-	$(CC) -I inc $(objects) -o $(TARGET)
+	$(CC) -I inc $(objects) -o $@
 
 $(OBJ)/%.o: $(SRC)/%.cpp | dirs
 	$(CC) -I inc $(CFLAGS) -c $< -o $@
 
 dirs:
-	-@mkdir -p $(OBJ)
-	-@mkdir -p $(BIN)
+	-@mkdir -p $(OBJ) $(BIN)
 
 clean:
 	-rm $(OBJ)/*.o $(TARGET)
