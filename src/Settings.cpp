@@ -1,7 +1,7 @@
 #include "Settings.h"
 #include "ScheckError.h"
 
-const char * const DEF_DICT = "data/mydictionary.dat";
+const char * const DEF_DICT = "../data/mydictionary.dat";
 const char * const DICT_OPT = "-d";
 const char * const CSV_OPT =  "-csv";
 const char * const XML_OPT =  "-xml";
@@ -17,14 +17,14 @@ Settings :: Settings( CommandLine & cl ) : mRepType( rtCSV ), mDictName( DEF_DIC
 		mRepType = rtXML;
 	}
 	cl.ExtractOpt( DICT_OPT, mDictName ) ;
-	
+
 	if ( cl.MoreOpts() ) {
 		throw ScheckError( "Invalid command line" );
 	}
 }
 
 Settings::Report Settings :: ReportType() const {
-	return mRepType; 
+	return mRepType;
 }
 
 std::string Settings :: DictName() const {

@@ -48,7 +48,7 @@ int main(int argc, char * argv[]) {
 			for(int i = 1; i < cl.Argc(); i++) {
 				ifstream sub(cl.Argv(i).c_str());
 				if (! sub.is_open()) {
-					throw ScheckError("Cannotopenfile" + cl.Argv(i));
+					throw ScheckError("Cannot open file" + cl.Argv(i));
 				}
 				CheckSubmission(d, sub, cl.Argv(i), *rep);
 			}
