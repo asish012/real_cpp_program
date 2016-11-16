@@ -16,12 +16,12 @@ public:
 private:
 	enum State { inSpace = 0, inWord, inDigit};
 	State state_;
-	std::istream & submission_;
-	unsigned int lineNumber_;
 	std::string line_;
 	unsigned int charPos_;
+	unsigned int lineNumber_;
+	std::istream & submission_;
 	bool readLine();
-	char nextChar();	
+	char nextChar();
 };
 
 #endif

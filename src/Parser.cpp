@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Parser::Parser(istream & stream) : submission_(stream), lineNumber_(0), charPos_(0), state_(inSpace) {
+Parser::Parser(istream & stream) : state_(inSpace), line_(string()), charPos_(0), lineNumber_(0), submission_(stream) {
 }
 
 string Parser::nextWord() {
@@ -37,7 +37,7 @@ string Parser::nextWord() {
 			default:
 				throw ScheckError ("Bad Character");
 				break;
-		}		
+		}
 	}
 	return "";
 }

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <memory>
+
 #include "Dictionary.h"
 #include "ScheckError.h"
 #include "Parser.h"
@@ -9,10 +11,10 @@
 
 using namespace std;
 
-Reporter * MakeReporter(Settings::Report rt) { 
+Reporter * MakeReporter(Settings::Report rt) {
 	if (rt == Settings::rtCSV) {
 		return new CSVReporter(cout);
-	} else { 
+	} else {
 		// return new XMLReporter(cout);
 		throw ScheckError("XMLReporter not implemented yet");
 	}
@@ -41,8 +43,8 @@ int main(int argc, char * argv[]) {
 		unique_ptr<Reporter> rep(MakeReporter(settings.ReportType()));
 
 		if (cl.Argc() == 1) {
-			CheckSubmission(d, cin, "stdin", *rep); 
-		} else { 
+			CheckSubmission(d, cin, "stdin", *rep);
+		} else {
 			for(int i = 1; i < cl.Argc(); i++) {
 				ifstream sub(cl.Argv(i).c_str());
 				if (! sub.is_open()) {
