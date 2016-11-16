@@ -41,10 +41,10 @@ Run
 ======
 
 	cd build
-	./../bin/real_program
-	./../bin/real_program ../data/submission1.txt
+	../bin/real_program
+	../bin/real_program ../data/submission1.txt
 
-	To run with default dictionary ~build: ./../bin/real_program [enter] then start typing words [enter]
-	To run with submission ~build: ./../bin/real_program data/submission1.txt
-	To run with custom dictionary and submission ~build: ./../bin/real_program -d data/mydictionary.dat data/submission1.txt
-	To run with default dictionary, custom submission and defining output formate ~build: ./../bin/real_program -csv data/submission1.txt
+	To run with default dictionary ~build: ../bin/real_program [enter] then start typing words [enter]
+	To run with submission ~build: ../bin/real_program data/submission1.txt
+	To run with custom dictionary and submission ~build: ../bin/real_program -d data/mydictionary.dat data/submission1.txt
+	To run with default dictionary, custom submission and defining output formate ~build: ../bin/real_program -csv data/submission1.txt
