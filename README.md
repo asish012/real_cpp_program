@@ -1,5 +1,5 @@
 Project Description
-======
+=
 You arrive in your office at a publisher of technical journals one morning to receive an email from your boss ::
 
 	We are getting lots of submissions in plain ASCII text from non-native English speakers these 
@@ -23,7 +23,7 @@ where the -n option only prints the number of errors, and the -d option specifie
 	article1.text,12,phiton,low-energy phiton is emitted
 
 Compile
-======
+=
 
 	[ with cmake ]
 	mkdir build
@@ -38,7 +38,7 @@ Compile
 	g++ -I inc src/main.cpp src/parser.cpp src/csvreporter.cpp src/commandline.cpp src/settings.cpp -o bin/scheck
 
 Run
-======
+=
 
 	cd build
 	../bin/real_program
