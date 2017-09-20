@@ -1,5 +1,5 @@
-Project Description
-=
+## Project Description
+
 You arrive in your office at a publisher of technical journals one morning to receive an email from your boss ::
 
 	We are getting lots of submissions in plain ASCII text from non-native English speakers these 
@@ -22,8 +22,7 @@ where the -n option only prints the number of errors, and the -d option specifie
 	article1.text,7,thre,perhaps thre is a reaction 
 	article1.text,12,phiton,low-energy phiton is emitted
 
-Compile
-=
+## Compile
 
 	[ with cmake ]
 	mkdir build
@@ -37,8 +36,7 @@ Compile
 	g++ -I inc src/parser.cpp src/main.cpp -o bin/scheck
 	g++ -I inc src/main.cpp src/parser.cpp src/csvreporter.cpp src/commandline.cpp src/settings.cpp -o bin/scheck
 
-Run
-=
+## Run
 
 	cd build
 	../bin/real_program
